@@ -38,7 +38,7 @@ fn main() {
         "1PM EST",
     ];
     let mut results = vec![];
-    let red_x: String = "❌".to_string();
+    let fail_str = "X".to_string();
     for input in inputs {
         let mut result = Results {
             input: input.to_string(),
@@ -54,7 +54,7 @@ fn main() {
                 result.temporis = date.to_string();
             }
             Err(_) => {
-                result.temporis = red_x.clone();
+                result.temporis = fail_str.clone();
             }
         }
         // natural_date_parser
@@ -63,7 +63,7 @@ fn main() {
                 result.natural_date_parser = date.to_string();
             }
             Err(_) => {
-                result.natural_date_parser = red_x.clone();
+                result.natural_date_parser = fail_str.clone();
             }
         }
         // chrono-english
@@ -76,7 +76,7 @@ fn main() {
                 result.chrono_english = date.to_string();
             }
             Err(_) => {
-                result.chrono_english = red_x.clone();
+                result.chrono_english = fail_str.clone();
             }
         }
         // parse_datetime
@@ -85,7 +85,7 @@ fn main() {
                 result.parse_datetime = date.to_string();
             }
             Err(_) => {
-                result.parse_datetime = red_x.clone();
+                result.parse_datetime = fail_str.clone();
             }
         }
         // tu
@@ -100,7 +100,7 @@ fn main() {
                 result.tu = date.to_string();
             }
             Err(_) => {
-                result.tu = red_x.clone();
+                result.tu = fail_str.clone();
             }
         }
         results.push(result);
