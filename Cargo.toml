@@ -1,0 +1,14 @@
+[package]
+name = "timestr"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.39"
+chrono-english = "0.1.7"
+inquire = "0.7.5"
+natural-date-parser = "0.1.3"
+parse_datetime = "0.7.0"
+tabled = "0.17.0"
+temporis = "1.0.2"
+tu = "0.2.0"
