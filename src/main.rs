@@ -8,10 +8,13 @@ struct Results {
     chrono_english: String,
     parse_datetime: String,
     tu: String,
+    date_time_parser: String,
+    dateparser: String,
 }
 
 fn main() {
     let inputs = vec![
+        "now",
         "tomorrow",
         "today",
         "yesterday",
@@ -36,6 +39,7 @@ fn main() {
         "1PM Eastern Time",
         "1PM EDT",
         "1PM EST",
+        "today 1PM EDT",
     ];
     let mut results = vec![];
     let fail_str = "X".to_string();
@@ -47,6 +51,8 @@ fn main() {
             chrono_english: "".to_string(),
             parse_datetime: "".to_string(),
             tu: "".to_string(),
+            date_time_parser: "".to_string(),
+            dateparser: "".to_string(),
         };
         // temporis
         match temporis::parse_date(&input) {
@@ -101,6 +107,26 @@ fn main() {
             }
             Err(_) => {
                 result.tu = fail_str.clone();
+            }
+        }
+        // date_time_parser
+        {
+            let date = date_time_parser::DateParser::parse(&input);
+            let time = date_time_parser::TimeParser::parse(&input);
+            if let (Some(date), Some(time)) = (date, time) {
+                // craete naivedatetime from naive date and time
+                result.date_time_parser = chrono::NaiveDateTime::new(date, time).to_string();
+            } else {
+                result.date_time_parser = fail_str.clone();
+            }
+        }
+        // dateparser
+        match dateparser::parse(&input) {
+            Ok(date) => {
+                result.dateparser = date.to_string();
+            }
+            Err(_) => {
+                result.dateparser = fail_str.clone();
             }
         }
         results.push(result);
